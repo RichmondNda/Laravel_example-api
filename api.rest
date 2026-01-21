@@ -1,0 +1,90 @@
+
+@baseUrl = http://127.0.0.1:8000
+@token = 8|SKR6ewyNaAr0LrXUus4guIHeUAFxHTIEKZKQyOfsf0923272
+
+@post_id = 7 
+
+
+POST {{baseUrl}}/api/register
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "johntest@example.com",
+  "password": "password123",
+  "password_confirmation": "password123"
+}
+
+
+### Login User
+
+POST {{baseUrl}}/api/login
+Content-Type: application/json
+
+{
+  "email": "johntest@example.com",
+  "password": "password123"
+}
+
+### Logout User
+
+POST {{baseUrl}}/api/logout
+Authorization: Bearer {{token}}
+
+
+### Get User Profile
+
+GET {{baseUrl}}/api/me
+Authorization: Bearer {{token}}
+
+
+### Get All Posts
+GET {{baseUrl}}/api/posts
+
+### Post Management 
+POST {{baseUrl}}/api/posts
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "title": "test",
+    "content": "Contenu de mon article sur Laravel et les APIs REST",
+    "user_id": 3
+}
+
+### Post Management 
+POST {{baseUrl}}/api/posts
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "title": "Article publié",
+    "content": "Cet article est publié immédiatement",
+    "user_id": 1,
+    "published_at": "2026-01-21 12:00:00"
+  }
+
+### Update Post
+PUT {{baseUrl}}/api/posts/{{post_id}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "title": "Titre modifié"
+}
+
+
+###    Delete Post
+DELETE {{baseUrl}}/api/posts/{{post_id}}
+Authorization: Bearer {{token}}
+
+###
+
+GET {{baseUrl}}/api/posts?filter[title]=Laravel
+
+###
+GET {{baseUrl}}/api/posts?filter[user_id]=1&sort=-created_at&include=user
+
+###
+GET {{baseUrl}}/api/post/9999
