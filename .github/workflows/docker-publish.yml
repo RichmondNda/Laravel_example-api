@@ -32,7 +32,7 @@ jobs:
       - name: Installation de Composer
         uses: php-actions/composer@v6
         with:
-          php_version: "8.5"
+          php_version: "8.3"
           version: 2.x
           args: --ignore-platform-reqs --optimize-autoloader
 
