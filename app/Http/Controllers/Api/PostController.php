@@ -15,6 +15,7 @@ use Spatie\LaravelData\PaginatedDataCollection;
 class PostController extends Controller
 {
     use AuthorizesRequests;
+    
 
     public function __construct(
         protected PostService $postService

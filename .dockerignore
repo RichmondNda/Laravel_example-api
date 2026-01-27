@@ -1,0 +1,61 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# CI/CD
+.github
+
+# Docker
+docker-compose*.yml
+compose.yaml
+Dockerfile
+.dockerignore
+
+# Documentation
+*.md
+DOCKER.md
+README.md
+API_DOCUMENTATION.md
+SETUP-GUIDE.md
+
+# Tests
+tests/
+phpunit.xml
+.phpunit.result.cache
+
+# Development
+.env.example
+.editorconfig
+.styleci.yml
+.php-cs-fixer.php
+api.rest
+
+# Node modules
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Storage (will be mounted as volume)
+storage/logs/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+
+# Vendor (will be installed during build)
+vendor/
+
+# Cache
+bootstrap/cache/*
+.phpunit.cache
+
+# OS
+.DS_Store
+Thumbs.db
