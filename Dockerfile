@@ -39,19 +39,19 @@ RUN apt-get update \
 RUN groupadd --force -g $WWWGROUP sail
 RUN useradd -ms /bin/bash --no-user-group -g $WWWGROUP -u 1337 sail
 
-# Copier les fichiers de dépendances
-COPY composer.json composer.lock ./
+# Copier les fichiers de configuration composer
+COPY --chown=sail:sail composer.json composer.lock ./
 
-# Installer les dépendances en tant que sail
-RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist
+# Installer les dépendances (en tant que root, puis changer les permissions)
+RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist --ignore-platform-reqs
 
 # Copier le reste de l'application
-COPY . /var/www/html
+COPY --chown=sail:sail . /var/www/html
 
 # Optimiser l'autoloader
 RUN composer dump-autoload --optimize --no-dev --classmap-authoritative
 
-# Définir les permissions
+# Définir les permissions finales
 RUN chown -R sail:sail /var/www/html \
     && chmod -R 755 /var/www/html/storage \
     && chmod -R 755 /var/www/html/bootstrap/cache
