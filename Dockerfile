@@ -39,8 +39,13 @@ RUN apt-get update \
 RUN groupadd --force -g $WWWGROUP sail
 RUN useradd -ms /bin/bash --no-user-group -g $WWWGROUP -u 1337 sail
 
-COPY . /var/www/html
+# Copier tous les fichiers de l'application
+COPY --chown=sail:sail . /var/www/html
 
+# Installer les dépendances et optimiser
+RUN composer install --no-dev --optimize-autoloader --prefer-dist --no-interaction --ignore-platform-reqs
+
+# Définir les permissions finales
 RUN chown -R sail:sail /var/www/html \
     && chmod -R 755 /var/www/html/storage \
     && chmod -R 755 /var/www/html/bootstrap/cache
