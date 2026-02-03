@@ -9,7 +9,6 @@
 # Docker
 docker-compose*.yml
 compose.yaml
-Dockerfile
 .dockerignore
 
 # Documentation
@@ -18,23 +17,29 @@ DOCKER.md
 README.md
 API_DOCUMENTATION.md
 SETUP-GUIDE.md
+DEPLOYMENT-GUIDE.md
 
 # Tests
 tests/
 phpunit.xml
 .phpunit.result.cache
+.phpunit.cache
 
 # Development
 .env.example
 .editorconfig
 .styleci.yml
 .php-cs-fixer.php
+.php-cs-fixer.cache
 api.rest
 
 # Node modules
 node_modules/
 npm-debug.log
 yarn-error.log
+package.json
+package-lock.json
+yarn.lock
 
 # IDE
 .vscode/
@@ -42,20 +47,34 @@ yarn-error.log
 *.swp
 *.swo
 *~
+.DS_Store
+Thumbs.db
 
-# Storage (will be mounted as volume)
+# Storage (will be created at runtime)
 storage/logs/*
-storage/framework/cache/*
+!storage/logs/.gitignore
+storage/framework/cache/data/*
+!storage/framework/cache/data/.gitignore
 storage/framework/sessions/*
+!storage/framework/sessions/.gitignore
 storage/framework/views/*
-
-# Vendor (will be installed during build)
-vendor/
+!storage/framework/views/.gitignore
 
 # Cache
 bootstrap/cache/*
-.phpunit.cache
+!bootstrap/cache/.gitignore
 
-# OS
-.DS_Store
-Thumbs.db
+# Vendor will be installed during build
+vendor/
+
+# Development tools
+create_user.php
+
+# Test app
+test_app/
+
+# Backup files
+*.sql
+*.sql.gz
+*.tar.gz
+*.backup
